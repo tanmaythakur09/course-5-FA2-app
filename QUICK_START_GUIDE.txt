@@ -1,0 +1,365 @@
+┌─────────────────────────────────────────────────────────────────────────────┐
+│          FA-2: ATM INTELLIGENCE DASHBOARD - LOCAL RUN GUIDE                 │
+│                    Complete Reference for Standalone Use                     │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+════════════════════════════════════════════════════════════════════════════════
+SECTION 1: SYSTEM REQUIREMENTS
+════════════════════════════════════════════════════════════════════════════════
+
+✓ Python 3.8 or higher
+✓ Windows / Mac / Linux
+✓ 500MB free disk space
+✓ 2GB RAM minimum
+✓ Internet connection (first-time package download)
+
+════════════════════════════════════════════════════════════════════════════════
+SECTION 2: INSTALLATION STEPS (5 MINUTES)
+════════════════════════════════════════════════════════════════════════════════
+
+STEP 1: Install Python Packages
+─────────────────────────────────
+Open Terminal/Command Prompt and run:
+
+  pip install pandas numpy matplotlib seaborn scikit-learn scipy streamlit
+
+STEP 2: Create Working Directory
+─────────────────────────────────
+Create a folder and place these 3 files:
+
+  📁 fa2-dashboard/
+     ├── streamlit_app.py              (Main app - SEE BELOW)
+     ├── create_sample_data.py         (Data generator - SEE BELOW)
+     └── atm_cash_management_dataset.csv (Auto-generated)
+
+STEP 3: Generate Sample Data
+─────────────────────────────
+Open Terminal in the folder and run:
+
+  python create_sample_data.py
+
+Expected output:
+  ✓ Sample dataset created: 5658 records
+  ✓ File: atm_cash_management_dataset.csv
+  ✓ Date range: 2022-01-01 to 2024-01-01
+  ✓ Unique ATMs: 50
+
+STEP 4: Launch Dashboard
+────────────────────────
+In Terminal, run:
+
+  streamlit run streamlit_app.py
+
+Expected output:
+  You can now view your Streamlit app in your browser.
+  Local URL: http://localhost:8501
+  Network URL: http://YOUR-IP:8501
+
+STEP 5: Open in Browser
+───────────────────────
+Copy and paste in your browser:
+  http://localhost:8501
+
+════════════════════════════════════════════════════════════════════════════════
+SECTION 3: FILE CONTENTS (COPY & PASTE)
+════════════════════════════════════════════════════════════════════════════════
+
+FILE 1: create_sample_data.py
+──────────────────────────────
+(See COMPLETE_CODE_REFERENCE.py in the project folder for full code)
+
+Key features:
+- Generates 5,658 realistic ATM records
+- 50 unique ATMs across 2 years
+- Multiple location types
+- Weather and behavioral factors
+- Saves to: atm_cash_management_dataset.csv
+
+
+FILE 2: streamlit_app.py
+────────────────────────
+(See COMPLETE_CODE_REFERENCE.py in the project folder for full code)
+
+Key features:
+- 5 interactive dashboard pages
+- Real-time data filtering
+- Tech-themed UI with animations
+- Dark gradient backgrounds
+- Responsive charts and visualizations
+
+
+════════════════════════════════════════════════════════════════════════════════
+SECTION 4: DASHBOARD FEATURES
+════════════════════════════════════════════════════════════════════════════════
+
+🏠 OVERVIEW
+├─ Dataset statistics (Records, ATMs, Date range)
+├─ Financial metrics (Withdrawals, Deposits, Cash demand)
+├─ Recent transactions preview
+└─ Quick summary cards
+
+📈 STAGE 3: EXPLORATORY DATA ANALYSIS (EDA)
+├─ Distribution Analysis
+│  ├─ Withdrawal histogram with mean line
+│  └─ Deposit histogram with mean line
+├─ Time-Based Trends
+│  ├─ Day of week patterns
+│  └─ Hourly patterns
+└─ Holiday & Event Impact
+
+🎯 STAGE 4: CLUSTERING ANALYSIS
+├─ Optimal K determination
+│  ├─ Elbow method visualization
+│  ├─ Silhouette score chart
+│  └─ Davies-Bouldin index
+├─ K-Means Implementation
+└─ Cluster Characteristics
+   └─ Expandable profiles per cluster
+
+⚠️ STAGE 5: ANOMALY DETECTION
+├─ Z-Score detection
+├─ IQR-based anomalies
+├─ Isolation Forest (ML)
+├─ Anomaly timeline visualization
+└─ Holiday vs normal day comparison
+
+🔧 STAGE 6: INTERACTIVE TOOLS
+├─ Advanced filtering
+│  ├─ Filter by day of week
+│  ├─ Filter by time of day
+│  └─ Filter by location type
+├─ Real-time statistics
+├─ High-risk ATM identification
+├─ Customizable risk thresholds
+└─ Filtered data preview
+
+
+════════════════════════════════════════════════════════════════════════════════
+SECTION 5: CUSTOMIZATION OPTIONS
+════════════════════════════════════════════════════════════════════════════════
+
+CHANGE DATASET SIZE
+───────────────────
+Edit create_sample_data.py:
+  n_records = 10000  # Change from 5658
+
+MODIFY COLORS
+─────────────
+Edit streamlit_app.py CSS section:
+  --primary: #0f3460;      # Dark blue
+  --accent: #00d4ff;       # Cyan (accent color)
+  --danger: #ff006e;       # Hot pink
+  --success: #00ff88;      # Neon green
+  --warning: #ffbe0b;      # Gold
+
+CHANGE PORT
+───────────
+If port 8501 is in use:
+  streamlit run streamlit_app.py --server.port 8502
+
+CHANGE CLUSTERING RANGE
+───────────────────────
+Edit streamlit_app.py in Stage 4:
+  K_range = range(2, 15)  # Change from range(2, 11)
+
+
+════════════════════════════════════════════════════════════════════════════════
+SECTION 6: TROUBLESHOOTING
+════════════════════════════════════════════════════════════════════════════════
+
+PROBLEM: "No module named 'streamlit'"
+SOLUTION: 
+  pip install streamlit --upgrade
+
+PROBLEM: "No such file or directory: 'atm_cash_management_dataset.csv'"
+SOLUTION:
+  Run: python create_sample_data.py
+  Ensure CSV is in same folder as streamlit_app.py
+
+PROBLEM: "Port 8501 already in use"
+SOLUTION:
+  streamlit run streamlit_app.py --server.port 8502
+
+PROBLEM: Dashboard loads slowly
+SOLUTION:
+  Wait 10-15 seconds on first load (data caching)
+  Subsequent loads will be faster (1-2 seconds)
+
+PROBLEM: "ModuleNotFoundError: No module named 'sklearn'"
+SOLUTION:
+  pip install scikit-learn --upgrade
+
+PROBLEM: Charts not displaying
+SOLUTION:
+  pip install matplotlib seaborn --upgrade
+  Restart streamlit: Ctrl+C then re-run command
+
+PROBLEM: Unicode characters (emojis) not showing correctly
+SOLUTION:
+  Windows: No action needed (handled automatically)
+  Mac/Linux: Install font: sudo apt-get install fonts-dejavu
+
+
+════════════════════════════════════════════════════════════════════════════════
+SECTION 7: PERFORMANCE NOTES
+════════════════════════════════════════════════════════════════════════════════
+
+First Load:        5-10 seconds (Streamlit caching & rendering)
+Subsequent Loads:  1-2 seconds
+Filtering:         Real-time (< 100ms)
+Clustering:        ~2 seconds
+Visualizations:    Auto-cached (instant on reload)
+
+Memory Usage:      ~150-200 MB
+CPU Usage:         Low (<5% idle, <20% during load)
+Disk Space:        ~50 MB (including CSV)
+
+
+════════════════════════════════════════════════════════════════════════════════
+SECTION 8: DATASET DETAILS
+════════════════════════════════════════════════════════════════════════════════
+
+Total Records:           5,658
+Time Period:             Jan 1, 2022 - Jan 1, 2024 (2 years)
+Unique ATMs:             50
+Transactions/Day:        ~8 (realistic)
+
+Columns (13 total):
+├─ Date:                    Transaction date
+├─ ATM_ID:                  1-50 (ATM identifier)
+├─ Total_Withdrawals:       Withdrawal amount in ₹
+├─ Total_Deposits:          Deposit amount in ₹
+├─ Previous_Day_Cash_Level: Bank balance before transaction
+├─ Cash_Demand_Next_Day:    Predicted demand (correlates with withdrawals: 0.980)
+├─ Day_of_Week:             Monday-Sunday
+├─ Time_of_Day:             Morning, Afternoon, Evening, Night
+├─ Location_Type:           Standalone, Supermarket, Mall, Bank Branch, Gas Station
+├─ Weather_Condition:       Clear, Cloudy, Rainy, Snowy
+├─ Nearby_Competitor_ATMs:  0-9 (other ATMs nearby)
+├─ Holiday_Flag:            1 if holiday, 0 otherwise
+└─ Special_Event_Flag:      1 if special event, 0 otherwise
+
+Data Quality:
+✓ No missing values
+✓ Realistic distributions
+✓ Correlation: Withdrawals ↔ Next-day demand = 0.980
+✓ Outliers preserved (legitimate high-value transactions)
+✓ Balanced across locations, days, times
+
+
+════════════════════════════════════════════════════════════════════════════════
+SECTION 9: ANALYSIS OUTPUTS & EXPECTED RESULTS
+════════════════════════════════════════════════════════════════════════════════
+
+CLUSTERING:
+├─ Optimal clusters:        8
+├─ Silhouette score:        0.198
+├─ Davies-Bouldin index:    ~2.5 (lower is better)
+└─ Cluster sizes:           ~650-780 records per cluster
+
+ANOMALY DETECTION:
+├─ Z-Score anomalies:       ~15
+├─ IQR anomalies:           ~40
+├─ ML-detected anomalies:   ~250
+├─ Combined total:          ~280-300
+└─ Anomaly rate:            4.9-5.3%
+
+EDA FINDINGS:
+├─ Peak day:                Tuesday (₹50,437)
+├─ Peak time:               Evening (₹50,044)
+├─ Holiday impact:          -1.9% (lower on holidays)
+├─ Event impact:            -1.1%
+└─ Weather impact:          Minimal (~1.7% variation)
+
+
+════════════════════════════════════════════════════════════════════════════════
+SECTION 10: QUICK REFERENCE COMMANDS
+════════════════════════════════════════════════════════════════════════════════
+
+# Install dependencies
+pip install pandas numpy matplotlib seaborn scikit-learn scipy streamlit
+
+# Generate data
+python create_sample_data.py
+
+# Run dashboard
+streamlit run streamlit_app.py
+
+# Run on different port
+streamlit run streamlit_app.py --server.port 8502
+
+# Run with theme
+streamlit run streamlit_app.py --theme.base=dark
+
+# Stop server
+Ctrl + C
+
+# View Streamlit cache
+streamlit cache clear
+
+# Check Python version
+python --version
+
+# List installed packages
+pip list
+
+# Update package
+pip install --upgrade streamlit
+
+
+════════════════════════════════════════════════════════════════════════════════
+SECTION 11: FILE LOCATIONS & STRUCTURE
+════════════════════════════════════════════════════════════════════════════════
+
+Your Project Folder Structure:
+──────────────────────────────
+
+fa2-dashboard/
+│
+├── streamlit_app.py                          ← Main app (DO NOT modify)
+├── create_sample_data.py                     ← Data generator (run once)
+├── atm_cash_management_dataset.csv           ← Generated data (~350 KB)
+│
+└── .streamlit/
+    └── config.toml                           ← Optional config file
+
+
+OR if running from project directory:
+C:\project\fa2-dashboard>
+
+Files needed:
+ ✓ streamlit_app.py
+ ✓ create_sample_data.py
+ ✓ (will auto-create: atm_cash_management_dataset.csv)
+
+
+════════════════════════════════════════════════════════════════════════════════
+SECTION 12: ADDITIONAL RESOURCES
+════════════════════════════════════════════════════════════════════════════════
+
+Official Docs:
+├─ Streamlit: https://docs.streamlit.io
+├─ Scikit-learn: https://scikit-learn.org
+├─ Pandas: https://pandas.pydata.org
+├─ Matplotlib: https://matplotlib.org
+└─ NumPy: https://numpy.org
+
+Tutorials:
+├─ Streamlit Tutorial: https://docs.streamlit.io/library/get-started
+├─ K-Means Clustering: https://scikit-learn.org/stable/modules/clustering.html
+├─ Anomaly Detection: https://scikit-learn.org/stable/modules/outlier_detection.html
+└─ Data Visualization: https://matplotlib.org/stable/tutorials/index.html
+
+
+════════════════════════════════════════════════════════════════════════════════
+✅ YOU'RE READY TO GO!
+
+Just follow these 4 simple steps:
+  1. pip install pandas numpy matplotlib seaborn scikit-learn scipy streamlit
+  2. python create_sample_data.py
+  3. streamlit run streamlit_app.py
+  4. Open: http://localhost:8501
+
+Questions? Check SECTION 6 (Troubleshooting) for common issues.
+
+════════════════════════════════════════════════════════════════════════════════
